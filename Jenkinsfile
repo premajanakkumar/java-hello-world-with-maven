@@ -16,16 +16,5 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('Deploy to Tomcat') {
-            steps {
-                script {
-                    // Stop and remove existing Tomcat container
-                    sh 'docker stop tomcat || true && docker rm tomcat || true'
-
-                    // Run new Tomcat container with the built WAR
-                    sh 'docker run -d -p 8080:8080 --name tomcat -v $WORKSPACE/target/your-maven-project.war:/usr/local/tomcat/webapps/your-maven-project.war tomcat:9.0'
-                }
-            }
-        }
     }
 }
