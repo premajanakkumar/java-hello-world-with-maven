@@ -17,12 +17,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package'                
             }
         }
-        agent any
-        
+                
         stage('Build Docker Image') {
+            agent any
             steps {
                 script {
                     writeFile file: 'Dockerfile', text: '''
