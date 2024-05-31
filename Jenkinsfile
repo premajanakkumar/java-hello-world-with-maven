@@ -21,7 +21,7 @@ pipeline {
             }
         }
         stage('Copy Artifact to Host') {
-            agent any
+            agent none
             steps {
                 script {
                     // Get the container ID of the running Docker agent
