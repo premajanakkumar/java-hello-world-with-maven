@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        DOCKER_IMAGE = "your-dockerhub-username/java-tomcat-app:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE = "pranesh-1998/java-tomcat-app:${env.BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
     }
     stages {
@@ -21,14 +21,9 @@ pipeline {
             }
         }
                 
-        stage('Build Docker Image') {
-            agent any
+         stage('Build Docker Image') {
             steps {
                 script {
-                    writeFile file: 'Dockerfile', text: '''
-                    FROM tomcat:9.0
-                    COPY target/*.war /usr/local/tomcat/webapps/
-                    '''
                     sh 'docker build -t ${DOCKER_IMAGE} .'
                 }
             }
