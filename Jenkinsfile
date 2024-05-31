@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        DOCKER_IMAGE = "pranesh-1998/java-tomcat-app:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE = "premajanakumar/java-tomcat-app:${env.BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
     }
     stages {
