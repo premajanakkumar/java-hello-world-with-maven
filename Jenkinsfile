@@ -20,7 +20,7 @@ pipeline {
                 sh 'mvn clean package'                
             }
         }
-        tage('Copy Artifact to Host') {
+        stage('Copy Artifact to Host') {
             steps {
                 script {
                     // Get the container ID of the running Docker agent
