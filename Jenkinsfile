@@ -20,6 +20,8 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+        agent any
+        
         stage('Build Docker Image') {
             steps {
                 script {
