@@ -28,7 +28,7 @@ pipeline {
                     def containerId = sh(script: "docker ps -qf 'ancestor=maven:3.9.3-eclipse-temurin-17'", returnStdout: true).trim()
                     
                     // Copy the artifact from the Docker container to the Jenkins host
-                    sh "docker cp ${containerId}:/path/to/your/target/*.jar ./"
+                    sh "docker cp ${containerId}:/var/lib/jenkins/workspace/Java-Maven-Container/target/*.jar ./"
                 }
             }
         }
