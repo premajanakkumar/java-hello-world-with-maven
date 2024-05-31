@@ -26,9 +26,12 @@ pipeline {
                 script {
                     // Get the container ID of the running Docker agent
                     def containerId = sh(script: "docker ps -qf 'ancestor=maven:3.9.3-eclipse-temurin-17'", returnStdout: true).trim()
+                    echo $containerId
                     
                     // Copy the artifact from the Docker container to the Jenkins host
-                    sh "docker cp ${containerId}:/var/lib/jenkins/workspace/Java-Maven-Container/target/*.jar ./"
+                    sh "docker cp ${containerId}:/var/lib/jenkins/workspace/Java-Maven-Container/target/*.jar ."
+                    sh(if [$? == 0] then;echo "copied successfully" else echo "failed")
+                        
                 }
             }
         }
