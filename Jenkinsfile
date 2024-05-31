@@ -20,6 +20,22 @@ pipeline {
                 sh 'mvn clean package'                
             }
         }
+        tage('Copy Artifact to Host') {
+            steps {
+                script {
+                    // Get the container ID of the running Docker agent
+                    def containerId = sh(script: "docker ps -qf 'ancestor=maven:3.9.3-eclipse-temurin-17'", returnStdout: true).trim()
+                    
+                    // Copy the artifact from the Docker container to the Jenkins host
+                    sh "docker cp ${containerId}:/path/to/your/target/*.jar ./"
+                }
+            }
+        }
+        stage('Archive Artifact') {
+            steps {
+                archiveArtifacts artifacts: '*.jar', allowEmptyArchive: true
+            }
+        }
                 
          stage('Build Docker Image') {
             steps {
